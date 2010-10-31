@@ -51,6 +51,7 @@ public class FbDialog extends Dialog {
     static final String DISPLAY_STRING = "touch";
     static final String FB_ICON = "icon.png";
     
+	private int mIcon;
     private String mUrl;
     private DialogListener mListener;
     private ProgressDialog mSpinner;
@@ -58,10 +59,11 @@ public class FbDialog extends Dialog {
     private LinearLayout mContent;
     private TextView mTitle;
     
-    public FbDialog(Context context, String url, DialogListener listener) {
+    public FbDialog(Context context, String url, DialogListener listener, int icon) {
         super(context);
         mUrl = url;
         mListener = listener;
+		mIcon = icon;
     }
 
     @Override
@@ -86,8 +88,7 @@ public class FbDialog extends Dialog {
 
     private void setUpTitle() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        Drawable icon = getContext().getResources().getDrawable(
-                R.drawable.facebook_icon);
+        Drawable icon = getContext().getResources().getDrawable(mIcon);
         mTitle = new TextView(getContext());
         mTitle.setText("Facebook");
         mTitle.setTextColor(Color.WHITE);

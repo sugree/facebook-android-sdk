@@ -58,6 +58,12 @@ public class Facebook {
 
     private String mAccessToken = null;
     private long mAccessExpires = 0;
+
+    private int mIcon;
+
+	public Facebook(int icon) {
+		mIcon = icon;
+	}
     
     /**
      * Starts a dialog which prompts the user to log in to Facebook and grant
@@ -361,7 +367,7 @@ public class Facebook {
             Util.showAlert(context, "Error", 
                     "Application requires permission to access the Internet");
         } else {
-            new FbDialog(context, url, listener).show();
+            new FbDialog(context, url, listener, mIcon).show();
         }
     }
 

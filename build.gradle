@@ -1,0 +1,27 @@
+buildscript {
+  repositories {
+    mavenRepo urls: 'http://jvoegele.com/maven2/'
+  }
+  dependencies {
+    classpath 'com.jvoegele.gradle.plugins:android-plugin:0.9.3'
+  }
+}
+
+dependsOnChildren()
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'eclipse'
+  apply plugin: com.jvoegele.gradle.plugins.android.AndroidPlugin
+
+  proguard.enabled = false
+
+  repositories {
+    mavenCentral()
+  }
+
+  eclipseClasspath {
+    downloadSources = false
+    downloadJavadoc = false
+  }
+}

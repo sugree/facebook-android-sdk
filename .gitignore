@@ -5,6 +5,8 @@
 *.classpath
 *.project
 *.settings
+.gradle
+*/local.properties
 facebook/bin/
 facebook/gen/
 examples/stream/bin/

@@ -68,9 +68,10 @@ public class LoginHandler extends Handler {
                     // instance because Android apparently doesn't support
                     // multiple WebView instances in the same app.
                     dispatcher.hideWebView();
-                    final Facebook fb = new Facebook();
-                    fb.authorize(getActivity(), App.FB_APP_ID, PERMISSIONS, 
-                            new AppLoginListener(fb));
+                    final Facebook fb = new Facebook(App.FB_APP_ID);
+                    Session.waitForAuthCallback(fb);
+                    fb.authorize(getActivity(), PERMISSIONS,
+                                 new AppLoginListener(fb));
                 }
             });
         }
@@ -95,7 +96,7 @@ public class LoginHandler extends Handler {
                  */
                 new AsyncFacebookRunner(fb).request("/me", 
                         new AsyncRequestListener() {
-                    public void onComplete(JSONObject obj) {
+                    public void onComplete(JSONObject obj, final Object state) {
                         // save the session data
                         String uid = obj.optString("id");
                         String name = obj.optString("name");
@@ -109,7 +110,7 @@ public class LoginHandler extends Handler {
                             }
                         });
                     }
-                });
+                }, null);
             }
 
             public void onError(DialogError e) {
